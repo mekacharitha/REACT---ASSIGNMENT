@@ -35,6 +35,14 @@
     margin: 5px;
 }
 
+.ShowButton{
+    height:35px;
+    width: 200px;
+    color: #eee;
+    background-color: #000;
+    margin: 5px;
+}
+
 .outputActivityList{
     padding:10px;
     height:60px;

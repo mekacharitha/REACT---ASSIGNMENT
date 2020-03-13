@@ -21,7 +21,7 @@ class Activities extends Component {
             endTime: currentDateEndTime,
             dateList: [],
             activityDate: new Date(),
-            displayActivities: false
+            displayActivities: false,
         }
     }
 
@@ -88,6 +88,11 @@ class Activities extends Component {
         }
     }
 
+    onShowActivitiesHandler = () => {
+        this.setState({
+            displayActivities: !this.state.displayActivities
+        })
+    }
 
     render() {
 
@@ -115,6 +120,7 @@ class Activities extends Component {
                     <div className="InputTime">
                         <label style={{ fontWeight: "bold" }}>Start Time  : </label>
                         <TimePickerComponent
+                            format={'HH:mm'}
                             onChange={this.onStartTimeChange}
                             value={this.state.startTime}
                         />
@@ -123,6 +129,7 @@ class Activities extends Component {
                     <div className="InputTime">
                         <label style={{ fontWeight: "bold" }}>End Time  : </label>
                         <TimePickerComponent
+                            format={'HH:mm'}
                             onChange={this.onEndTimeChange}
                             value={this.state.endTime}
                         />
@@ -130,6 +137,11 @@ class Activities extends Component {
 
                     <button className="Button"
                         onClick={() => this.onAddActivityHandler()}>Add Activity</button>
+                </div>
+
+                <div>
+                    <button className="ShowButton"
+                        onClick={() => this.onShowActivitiesHandler()}>{! this.state.displayActivities ? 'Show Activities' : 'Close Activities'}</button>
                 </div>
 
                 <div className="outputContent">
