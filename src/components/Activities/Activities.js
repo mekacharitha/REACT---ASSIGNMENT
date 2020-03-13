@@ -8,31 +8,23 @@ import { TimePickerComponent } from '@syncfusion/ej2-react-calendars';
 
 class Activities extends Component {
 
-    
-    
-    constructor(props){
+
+
+    constructor(props) {
         super(props);
         let currentDate = new Date();
         let currentDateEndTime = new Date();
-        currentDateEndTime.setHours(23 , 59) ;
+        currentDateEndTime.setHours(23, 59);
         this.state = {
             activity: '',
             startTime: currentDate,
             endTime: currentDateEndTime,
             dateList: [],
             activityDate: new Date(),
-            activities: {
-                // password:'',
-                // date: [{
-                //     activity: '',
-                //     startTime: null,
-                //     endTime: null,
-                // }]
-            },
-            displayActivities:false
+            displayActivities: false
         }
     }
-    
+
 
     inputChangeHandler = (event) => {
         this.setState({
@@ -60,8 +52,8 @@ class Activities extends Component {
 
     onAddActivityHandler = () => {
 
-         this.setState({
-            displayActivities:true
+        this.setState({
+            displayActivities: true
         })
         let localStorageData = null;
         let item = {
@@ -73,28 +65,20 @@ class Activities extends Component {
 
         localStorageData = JSON.parse(localStorage.getItem(this.props.username));
 
-        let currDate =`${this.state.activityDate.getDate()}/${this.state.activityDate.getMonth()}/${this.state.activityDate.getFullYear()}`
+        let currDate = `${this.state.activityDate.getDate()}/${this.state.activityDate.getMonth()}/${this.state.activityDate.getFullYear()}`
         let dateExists = false;
 
         if (localStorageData.activities != null) {
             let dates = Object.keys(localStorageData.activities)
-           
-            for (let i = 0; i < dates.length; i++) {
-                if (currDate === dates[i]){
-                    dateExists = true;
-                    break;
-                }
-            }
+            dateExists = dates.includes(currDate);
+            console.log(dateExists);
         }
         if (dateExists) {
-            //console.log("in dateExists");
             localStorageData.activities[currDate].push(item)
             localStorage.setItem(this.props.username, JSON.stringify(localStorageData))
 
         }
         else {
-            // localStorageData.activities[this.state.activityDate] = item;
-            //console.log(localStorageData);
             localStorageData.activities = {
                 ...localStorageData.activities,
                 [currDate]: [item]
@@ -102,10 +86,6 @@ class Activities extends Component {
             localStorage.setItem(this.props.username, JSON.stringify(localStorageData))
 
         }
-        // let outputData = JSON.parse(localStorage.getItem(this.props.username));
-        // outputData.activities[`${this.state.activityDate.getDate()}/${this.state.activityDate.getMonth()}/${this.state.activityDate.getFullYear()}`].map((obj , index )=>{
-        //     console.log(`activity ${obj.activity}  startTime ${obj.startTime} endTime ${obj.endTime}`);
-        // });
     }
 
 
@@ -153,10 +133,9 @@ class Activities extends Component {
                 </div>
 
                 <div className="outputContent">
-                    {this.state.displayActivities ? 
-                           <Output username={this.props.username}/>
-                    : null}
-
+                    {this.state.displayActivities ?
+                        <Output username={this.props.username} />
+                        : null}
                 </div>
 
             </div>
