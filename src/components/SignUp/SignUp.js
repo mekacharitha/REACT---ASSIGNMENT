@@ -53,6 +53,7 @@ class SignUp extends Component {
             password:'',
             signup:false
         })
+        localStorage.removeItem("signedInUser")
     }
 
 
