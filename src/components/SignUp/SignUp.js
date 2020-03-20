@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Activities from '../Activities/Activities';
 import './SignUp.css';
+const axios = require('axios');
 
 class SignUp extends Component {
 
@@ -45,13 +46,21 @@ class SignUp extends Component {
         }
         localStorage.setItem("signedInUser", this.state.username)
 
+        // axios.post('http://localhost:8000/signup', {
+        //     name: this.state.username,
+        //     password: this.state.password
+        // }).then(function (response) {
+        //     console.log(response);
+        // })
+
+
     }
 
     onLogoutHandler = () => {
         this.setState({
-            username:'',
-            password:'',
-            signup:false
+            username: '',
+            password: '',
+            signup: false
         })
         localStorage.removeItem("signedInUser")
     }
@@ -63,17 +72,18 @@ class SignUp extends Component {
             <div>
                 {this.state.signup ?
                     <div>
-                        <button onClick={this.onLogoutHandler} style={{marginTop:"50px"}}>LOGOUT</button>
+                        <button onClick={this.onLogoutHandler} style={{ marginTop: "50px" ,"backgroundColor":"#282c34" ,"color":"white"}}>LOGOUT</button>
                         <Activities
                             username={this.state.username}> </Activities>
                     </div>
                     :
                     <div className="SignUp">
+                        <p style={{"fontWeight":"bold" , "fontSize":"large" }}>SIGNUP</p>
                         <input className="Input" type="text" value={this.state.username} placeholder="USERNAME" onChange={this.usernameChangeHandler} />
                         <br />
                         <input className="Input" type="password" value={this.state.password} placeholder="PASSWORD" onChange={this.passwordChangeHandler} />
                         <br />
-                        <button onClick={this.onSubmitHandler} >SIGNUP</button>
+                        <button onClick={this.onSubmitHandler} className="SignupButton">SIGNUP</button>
                     </div>
                 }
             </div>

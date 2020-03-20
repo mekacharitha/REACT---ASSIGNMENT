@@ -2,7 +2,7 @@
     text-align: center;
     margin:20px auto;
     width:60%;
-    height:150px;
+    height:250px;
     box-shadow: 0 2px 3px #ccc;
     border:1px solid #eee ;
     padding: 20px;
@@ -12,4 +12,12 @@
 .Input{
     margin: 10px;
     border:1px solid rgb(53, 48, 48);
+}
+
+.SignupButton{
+    margin-top: 5px;
+    background-color: #282c34;
+    color: aliceblue;
+    height:30px;
+    width:75px
 }

@@ -62,7 +62,6 @@ class Activities extends Component {
             endTime: this.state.endTime,
         }
 
-
         localStorageData = JSON.parse(localStorage.getItem(this.props.username));
 
         let currDate = `${this.state.activityDate.getDate()}/${this.state.activityDate.getMonth()}/${this.state.activityDate.getFullYear()}`
@@ -71,7 +70,12 @@ class Activities extends Component {
         if (localStorageData.activities != null) {
             let dates = Object.keys(localStorageData.activities)
             dateExists = dates.includes(currDate);
-            console.log(dateExists);
+            //console.log(Object.keys(localStorageData.activities).length);
+            let lenActivities = Object.keys(localStorageData.activities).length;
+            //console.log(localStorageData.activities[dates[0]]);
+            if(lenActivities === 7){
+                delete localStorageData.activities[dates[0]]
+            }
         }
         if (dateExists) {
             localStorageData.activities[currDate].push(item)

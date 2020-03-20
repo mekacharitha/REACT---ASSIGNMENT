@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+//import Modal from 'react-modal';
 import './Output.css';
 
 class Report extends Component {
@@ -15,7 +16,7 @@ class Report extends Component {
                             <div>Date: {date}</div>
                             <div>Activity: {act.activity}</div>
                             {/* <div>Duration: {moment.utc(moment(act.endTime, "DD/MM/YYYY HH:mm:ss").diff(moment(act.startTime, "DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss")}</div> */}
-                            <div>Duration: {(moment(act.endTime).diff(moment(act.startTime)))/60000} mins</div>
+                            <div>Duration: {(moment(act.endTime).diff(moment(act.startTime)))} milliseconds</div>
                         </div>
 
                     )
