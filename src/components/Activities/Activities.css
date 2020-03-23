@@ -37,6 +37,7 @@
 .container{
     height: 100%;
     align-content: center;
+    margin-top: 50px;
     }
 
 .ShowButton{

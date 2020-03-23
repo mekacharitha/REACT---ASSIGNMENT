@@ -75,11 +75,11 @@ class Activities extends Component {
             let dates = Object.keys(localStorageData.activities)
             dateExists = dates.includes(currDate);
             //console.log(Object.keys(localStorageData.activities).length);
-            let lenActivities = Object.keys(localStorageData.activities).length;
-            //console.log(localStorageData.activities[dates[0]]);
-            if (lenActivities === 7) {
-                delete localStorageData.activities[dates[0]]
-            }
+            // let lenActivities = Object.keys(localStorageData.activities).length;
+            // console.log(localStorageData.activities[dates[0]]);
+            // if (lenActivities === 7) {
+            //     delete localStorageData.activities[dates[0]]
+            // }
         }
         if (dateExists) {
             localStorageData.activities[currDate].push(item)

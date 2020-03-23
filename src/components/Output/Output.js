@@ -20,7 +20,7 @@ class Report extends Component {
                             <td>{obj.activity}</td>
                             <td> {moment.utc(obj.startTime).format('HH:mm')}</td>
                             <td>{moment.utc(obj.endTime).format('HH:mm')}</td>
-                            <td>{Math.abs(moment(obj.endTime).diff(moment(obj.startTime))) / 60000} minutes</td>
+                            <td>{Math.floor((moment(obj.endTime).diff(moment(obj.startTime)))/60000)} minutes</td>
 
                         </tr>
                     </tbody>
@@ -28,7 +28,7 @@ class Report extends Component {
             })
         }
         else {
-            return (<tbody><tr><td colSpan="5" ><h1>No activities found on this date </h1></td></tr></tbody>)
+            return (<tbody><tr><td colSpan="5" ><h3>No activities found on this date </h3></td></tr></tbody>)
         }
 
     }
