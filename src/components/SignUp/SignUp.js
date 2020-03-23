@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Activities from '../Activities/Activities';
+// import Activities from '../Activities/Activities';
+import SideBar from '../sidebar/SideBar';
 import './SignUp.css';
-const axios = require('axios');
+// const axios = require('axios');
 
 class SignUp extends Component {
 
@@ -72,13 +73,15 @@ class SignUp extends Component {
             <div>
                 {this.state.signup ?
                     <div>
-                        <button onClick={this.onLogoutHandler} style={{ marginTop: "50px" ,"backgroundColor":"#282c34" ,"color":"white"}}>LOGOUT</button>
-                        <Activities
-                            username={this.state.username}> </Activities>
+                        {/* <button onClick={this.onLogoutHandler} style={{ marginTop: "50px" ,"backgroundColor":"#282c34" ,"color":"white" }}>LOGOUT</button> */}
+                        {/* <Activities
+                            username={this.state.username}> </Activities> */}
+                        <SideBar username={this.state.username} onLogout={this.onLogoutHandler}> </SideBar>
+
                     </div>
                     :
                     <div className="SignUp">
-                        <p style={{"fontWeight":"bold" , "fontSize":"large" }}>SIGNUP</p>
+                        <p style={{"fontWeight":"bold" , "fontSize":"30px" }}>SIGN UP</p>
                         <input className="Input" type="text" value={this.state.username} placeholder="USERNAME" onChange={this.usernameChangeHandler} />
                         <br />
                         <input className="Input" type="password" value={this.state.password} placeholder="PASSWORD" onChange={this.passwordChangeHandler} />

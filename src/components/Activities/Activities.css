@@ -1,14 +1,13 @@
 .Activities{
     text-align: center;
     align-items: center;
-    margin:30px auto;
 }
 
 .InputActivityDiv{
     text-align: center;
     margin:20px auto;
     width:40%;
-    height:250px;
+    height:300px;
     box-shadow: 0 2px 3px #ccc;
     border:1px solid #eee ;
     padding: 20px;
@@ -28,19 +27,24 @@
 }
 
 .Button{
-    height:25px;
+    height:30px;
     width: 100px;
     color: #eee;
     background-color:#282c34;
     margin: 5px;
 }
 
+.container{
+    height: 100%;
+    align-content: center;
+    }
+
 .ShowButton{
     height:35px;
     width: 200px;
     color: #eee;
     background-color: #282c34;
-    margin: 5px;
+    margin: 10px;
 }
 
 .outputActivityList{
@@ -50,3 +54,18 @@
     border:.5px solid black;
     margin-bottom: 5px;
   }
+
+  .my-custom-scrollbar {
+    position: relative;
+    height: 500px;
+    overflow: auto;
+}
+    .table-wrapper-scroll-y {
+    display: block;
+}
+    td{
+        text-align: center;
+    }
+    tr{
+        text-align: center;
+    }

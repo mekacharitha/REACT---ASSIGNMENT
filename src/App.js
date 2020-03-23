@@ -3,11 +3,12 @@ import SignUp from './components/SignUp/SignUp';
 import './App.css';
 
 function App() {
-
+  
   return (
+
     <div className="App">
       <div className="header">
-            ACTIVITY TRACKER
+            
       </div>
         <SignUp /> 
     </div>

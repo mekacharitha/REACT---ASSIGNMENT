@@ -6,6 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import { TimePickerComponent } from '@syncfusion/ej2-react-calendars';
 
+//import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 class Activities extends Component {
 
 
@@ -21,6 +23,8 @@ class Activities extends Component {
             endTime: currentDateEndTime,
             dateList: [],
             activityDate: new Date(),
+            present: new Date(),
+            display: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
             displayActivities: false,
         }
     }
@@ -64,7 +68,7 @@ class Activities extends Component {
 
         localStorageData = JSON.parse(localStorage.getItem(this.props.username));
 
-        let currDate = `${this.state.activityDate.getDate()}/${this.state.activityDate.getMonth()}/${this.state.activityDate.getFullYear()}`
+        let currDate = `${this.state.activityDate.getDate()}/${this.state.activityDate.getMonth() + 1}/${this.state.activityDate.getFullYear()}`
         let dateExists = false;
 
         if (localStorageData.activities != null) {
@@ -73,7 +77,7 @@ class Activities extends Component {
             //console.log(Object.keys(localStorageData.activities).length);
             let lenActivities = Object.keys(localStorageData.activities).length;
             //console.log(localStorageData.activities[dates[0]]);
-            if(lenActivities === 7){
+            if (lenActivities === 7) {
                 delete localStorageData.activities[dates[0]]
             }
         }
@@ -92,6 +96,26 @@ class Activities extends Component {
         }
     }
 
+    handlePrevious = () => {
+        let date = this.state.present;
+        date.setDate(date.getDate() - 1)
+        this.setState({ present: date })
+        let currDate = `${this.state.present.getDate()}/${this.state.present.getMonth() + 1}/${this.state.present.getFullYear()}`
+        console.log(currDate)
+        this.setState({ display: currDate })
+    }
+    handlePresent = (date) => {
+        this.setState({ present: date })
+    }
+    handleNext = () => {
+        let date = this.state.present;
+        date.setDate(date.getDate() + 1)
+        this.setState({ present: date })
+        let currDate = `${this.state.present.getDate()}/${this.state.present.getMonth() + 1}/${this.state.present.getFullYear()}`
+        console.log(currDate)
+        this.setState({ display: currDate })
+    }
+
     onShowActivitiesHandler = () => {
         this.setState({
             displayActivities: !this.state.displayActivities
@@ -102,7 +126,10 @@ class Activities extends Component {
 
         return (
             <div className="Activities">
-
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+                <link rel="stylesheet" type="text/css" href="styles.css" />
+               
                 <div className="InputActivityDiv">
 
                     <input className="InputActivity"
@@ -112,7 +139,7 @@ class Activities extends Component {
                         onChange={(event) => this.inputChangeHandler(event)} />
 
                     <div className="InputTime">
-                        <label style={{ fontWeight: "bold" }}>Date  : </label>
+                        <label style={{ fontWeight: "bold" , marginRight:"2px"}}>Date  : </label>
                         <DatePicker
                             dateFormat='dd-MM-yyyy'
                             selected={this.state.activityDate}
@@ -122,7 +149,7 @@ class Activities extends Component {
                     </div>
 
                     <div className="InputTime">
-                        <label style={{ fontWeight: "bold" }}>Start Time  : </label>
+                        <label style={{ fontWeight: "bold" , marginRight:"2px"}}>Start Time  : </label>
                         <TimePickerComponent
                             format={'HH:mm'}
                             onChange={this.onStartTimeChange}
@@ -131,7 +158,7 @@ class Activities extends Component {
                     </div>
 
                     <div className="InputTime">
-                        <label style={{ fontWeight: "bold" }}>End Time  : </label>
+                        <label style={{ fontWeight: "bold" , marginRight:"2px"}}>End Time  : </label>
                         <TimePickerComponent
                             format={'HH:mm'}
                             onChange={this.onEndTimeChange}
@@ -145,18 +172,81 @@ class Activities extends Component {
 
                 <div>
                     <button className="ShowButton"
-                        onClick={() => this.onShowActivitiesHandler()}>{! this.state.displayActivities ? 'Show Activities' : 'Close Activities'}</button>
+                        onClick={() => this.onShowActivitiesHandler()}>{!this.state.displayActivities ? 'Show Activities' : 'Close Activities'}</button>
                 </div>
 
-                <div className="outputContent">
+                {/* <div className="outputContent">
                     {this.state.displayActivities ?
-                        <Output username={this.props.username} />
-                        : null}
-                </div>
+                       // <Output username={this.props.username} />
 
+                        : null}
+                </div> */}
+                <div className='container'>
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    {this.state.displayActivities ?
+                        <table className="table table-bordered">
+                            <thead className="thead-dark">
+                                <tr>
+                                    <th scope="col" >
+                                        <div className="form-group">
+                                            <button class="btn float-right login_btn" onClick={this.handlePrevious}>Previous</button>
+                                        </div>
+                                    </th>
+                                    <th colSpan='3' scope="col">
+                                        <div className="input-group form-group">
+                                            <DatePicker className="form-control" placeholder="date" onChange={this.handlePresent} selected={this.state.present} value={this.state.present} />
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div className="form-group">
+                                            <button class="btn float-right login_btn" onClick={this.handleNext}>Next</button>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Start Time</th>
+                                    <th scope="col">End Time</th>
+                                    <th scope="col">Duration</th>
+                                </tr>
+                            </thead>
+                            
+
+                            <Output date={this.state.display} username={this.props.username}></Output>
+                            
+                        </table>
+
+                        : null
+                    }
+                </div >
+                </div>
             </div>
         )
     }
 }
 
 export default Activities;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,26 +5,33 @@ import './Output.css';
 
 class Report extends Component {
     render() {
+        let c = 0;
         let outputData = JSON.parse(localStorage.getItem(this.props.username))
         let dates = Object.keys(outputData.activities)
+        let bool = dates.includes(this.props.date)
+        //console.log(this.props.date);
+        if (bool) {
+            return outputData.activities[this.props.date].map((obj) => {
+                c++
+                return (
+                    <tbody>
+                        <tr>
+                            <td scope="row">{c}</td>
+                            <td>{obj.activity}</td>
+                            <td> {moment.utc(obj.startTime).format('HH:mm')}</td>
+                            <td>{moment.utc(obj.endTime).format('HH:mm')}</td>
+                            <td>{Math.abs(moment(obj.endTime).diff(moment(obj.startTime))) / 60000} minutes</td>
 
-        return (
-            dates.map((date) => {
-                return outputData.activities[date].map((act) => {
-                    return (
-                        <div className="Output">
-                            <div>Date: {date}</div>
-                            <div>Activity: {act.activity}</div>
-                            {/* <div>Duration: {moment.utc(moment(act.endTime, "DD/MM/YYYY HH:mm:ss").diff(moment(act.startTime, "DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss")}</div> */}
-                            <div>Duration: {(moment(act.endTime).diff(moment(act.startTime)))} milliseconds</div>
-                        </div>
-
-                    )
-                })
+                        </tr>
+                    </tbody>
+                )
             })
-        )
+        }
+        else {
+            return (<tbody><tr><td colSpan="5" ><h1>No activities found on this date </h1></td></tr></tbody>)
+        }
+
     }
 }
 
 export default Report;
-
