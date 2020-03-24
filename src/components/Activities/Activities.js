@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import { TimePickerComponent } from '@syncfusion/ej2-react-calendars';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
 //import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -58,12 +58,12 @@ class Activities extends Component {
 
     onAddActivityHandler = () => {
 
-        if(this.state.activity !==''){
+        if (this.state.activity !== '') {
             NotificationManager.success('Activity added successfully');
         }
-        else{
-            NotificationManager.error('No Activity Title added',"",2000);
-              return;
+        else {
+            NotificationManager.error('No Activity Title added', "", 2000);
+            return;
         }
         this.setState({
             displayActivities: true
@@ -110,23 +110,23 @@ class Activities extends Component {
         date.setDate(date.getDate() - 1)
         this.setState({ present: date })
         let currDate = `${this.state.present.getDate()}/${this.state.present.getMonth() + 1}/${this.state.present.getFullYear()}`
-       // console.log(currDate)
+        // console.log(currDate)
         this.setState({ display: currDate })
     }
     handlePresent = (date) => {
         let xyz = this.state.present;
         xyz.setDate(date.getDate());
         this.setState({ present: xyz })
-        
+
         let currDate = `${this.state.present.getDate()}/${this.state.present.getMonth() + 1}/${this.state.present.getFullYear()}`
-        this.setState({ display: currDate }) 
+        this.setState({ display: currDate })
     }
     handleNext = () => {
         let date = this.state.present;
         date.setDate(date.getDate() + 1)
         this.setState({ present: date })
         let currDate = `${this.state.present.getDate()}/${this.state.present.getMonth() + 1}/${this.state.present.getFullYear()}`
-       // console.log(currDate)
+        // console.log(currDate)
         this.setState({ display: currDate })
     }
 
@@ -153,7 +153,7 @@ class Activities extends Component {
                         onChange={(event) => this.inputChangeHandler(event)} />
 
                     <div className="InputTime">
-                        <label style={{ fontWeight: "bold" , marginRight:"2px"}}>Date  : </label>
+                        <label style={{ fontWeight: "bold", marginRight: "2px" }}>Date  : </label>
                         <DatePicker
                             dateFormat='dd-MM-yyyy'
                             selected={this.state.activityDate}
@@ -163,7 +163,7 @@ class Activities extends Component {
                     </div>
 
                     <div className="InputTime">
-                        <label style={{ fontWeight: "bold" , marginRight:"2px"}}>Start Time  : </label>
+                        <label style={{ fontWeight: "bold", marginRight: "2px" }}>Start Time  : </label>
                         <TimePickerComponent
                             format={'HH:mm'}
                             onChange={this.onStartTimeChange}
@@ -172,7 +172,7 @@ class Activities extends Component {
                     </div>
 
                     <div className="InputTime">
-                        <label style={{ fontWeight: "bold" , marginRight:"2px"}}>End Time  : </label>
+                        <label style={{ fontWeight: "bold", marginRight: "2px" }}>End Time  : </label>
                         <TimePickerComponent
                             format={'HH:mm'}
                             onChange={this.onEndTimeChange}
@@ -183,47 +183,47 @@ class Activities extends Component {
                     <button className="Button"
                         onClick={() => this.onAddActivityHandler()}>Add Activity</button>
                 </div>
-               
+
                 {/* <div>
                     <button className="ShowButton"
                         onClick={() => this.onShowActivitiesHandler()}>{!this.state.displayActivities ? 'Show Activities' : 'Close Activities'}</button>
                 </div> */}
 
                 <div className='container'>
-                <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                    {this.state.displayActivities ?
-                        <table className="table table-bordered">
-                            <thead className="thead-dark">
-                                <tr>
-                                    <th scope="col" align="left">
-                                            <button class="btn float-left login_btn" onClick={this.handlePrevious}>Previous</button>                                       
-                                    </th>
-                                    <th colSpan='3' scope="col" align="center" >
-                                        <div  style={{textAlign:"center"}}>
-                                            <DatePicker className="form-control" placeholder="date" onChange={this.handlePresent} selected={this.state.present} value={this.state.present} />
-                                        </div>
-                                    </th>
-                                    <th scope="col" align="right">
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        {this.state.displayActivities ?
+                            <table className="table table-bordered">
+                                <thead className="thead-dark">
+                                    <tr>
+                                        <th scope="col" align="left">
+                                            <button class="btn float-left login_btn" onClick={this.handlePrevious}>Previous</button>
+                                        </th>
+                                        <th colSpan='3' scope="col" align="center" >
+                                            <div style={{ textAlign: "center" }}>
+                                                <DatePicker className="form-control" placeholder="date" onChange={this.handlePresent} selected={this.state.present} value={this.state.present} />
+                                            </div>
+                                        </th>
+                                        <th scope="col" align="right">
                                             <button class="btn float-right login_btn" onClick={this.handleNext}>Next</button>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Start Time</th>
-                                    <th scope="col">End Time</th>
-                                    <th scope="col">Duration</th>
-                                </tr>
-                            </thead>
-                            
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Start Time</th>
+                                        <th scope="col">End Time</th>
+                                        <th scope="col">Duration</th>
+                                    </tr>
+                                </thead>
 
-                            <Output date={this.state.display} username={this.props.username}></Output>
-                            
-                        </table>
 
-                        : null
-                    }
-                </div >
+                                <Output date={this.state.display} username={this.props.username}></Output>
+
+                            </table>
+
+                            : null
+                        }
+                    </div >
                 </div>
             </div>
         )

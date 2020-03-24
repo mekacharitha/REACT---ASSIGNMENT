@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import Activities from '../Activities/Activities';
 import SideBar from '../sidebar/SideBar';
 import './SignUp.css';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 // const axios = require('axios');
 
@@ -31,15 +31,15 @@ class SignUp extends Component {
     }
 
     onSubmitHandler = () => {
-        
-        if(this.state.password !=="" && this.state.username !==""){
+
+        if (this.state.password !== "" && this.state.username !== "") {
             NotificationManager.success('Login Success');
             this.setState({
                 signup: true,
             })
         }
-        else{
-            NotificationManager.error('No username or password', 'Click me!', 3000,);
+        else {
+            NotificationManager.error('No username or password', 'Click me!', 3000);
         }
         let obj = {
             password: this.state.password,
@@ -92,7 +92,7 @@ class SignUp extends Component {
                     </div>
                     :
                     <div className="SignUp">
-                        <p style={{"fontWeight":"bold" , "fontSize":"30px" }}>SIGN UP</p>
+                        <p style={{ "fontWeight": "bold", "fontSize": "30px" }}>SIGN UP</p>
                         <input className="Input" type="text" value={this.state.username} placeholder="USERNAME" onChange={this.usernameChangeHandler} />
                         <br />
                         <input className="Input" type="password" value={this.state.password} placeholder="PASSWORD" onChange={this.passwordChangeHandler} />

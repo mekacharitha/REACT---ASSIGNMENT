@@ -31,7 +31,7 @@ class Report extends Component {
             prevDates.push(nowDate)
         }
         //  console.log(prevDates);
-        let index = 0 , count=0;
+        let index = 0, count = 0;
         return (
             <div className='Report'>
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
@@ -56,10 +56,10 @@ class Report extends Component {
                                 let duration = 0;
                                 let durDisplay
                                 outputData.activities[date].map((obj) => {
-                                    if(obj.endTime !==""){
-                                    count++;
-                                    duration = duration + (Math.floor((moment(obj.endTime).diff(moment(obj.startTime))) / 60000))
-                                    durDisplay = `${Math.floor((duration/60))} : ${(duration%60)} hrs` ;
+                                    if (obj.endTime !== "") {
+                                        count++;
+                                        duration = duration + (Math.floor((moment(obj.endTime).diff(moment(obj.startTime))) / 60000))
+                                        durDisplay = `${Math.floor((duration / 60))} Hrs ${(duration % 60)} mins`;
                                     }
                                 })
                                 // console.log(`count of activities for ${date} is ${count} and duration is ${duration}`);
