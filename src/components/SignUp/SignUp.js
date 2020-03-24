@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import Activities from '../Activities/Activities';
 import SideBar from '../sidebar/SideBar';
 import './SignUp.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 // const axios = require('axios');
 
 class SignUp extends Component {
@@ -29,9 +31,16 @@ class SignUp extends Component {
     }
 
     onSubmitHandler = () => {
-        this.setState({
-            signup: true,
-        })
+        
+        if(this.state.password !=="" && this.state.username !==""){
+            NotificationManager.success('Login Success');
+            this.setState({
+                signup: true,
+            })
+        }
+        else{
+            NotificationManager.error('No username or password', 'Click me!', 3000,);
+        }
         let obj = {
             password: this.state.password,
             activities: {
@@ -64,6 +73,7 @@ class SignUp extends Component {
             signup: false
         })
         localStorage.removeItem("signedInUser")
+        NotificationManager.success('Logout Success');
     }
 
 
@@ -71,6 +81,7 @@ class SignUp extends Component {
 
         return (
             <div>
+                <NotificationContainer />
                 {this.state.signup ?
                     <div>
                         {/* <button onClick={this.onLogoutHandler} style={{ marginTop: "50px" ,"backgroundColor":"#282c34" ,"color":"white" }}>LOGOUT</button> */}

@@ -12,6 +12,13 @@ class Report extends Component {
         //console.log(this.props.date);
         if (bool) {
             return outputData.activities[this.props.date].map((obj) => {
+                let duration = Math.floor((moment(obj.endTime).diff(moment(obj.startTime)))/60000) ;
+                let displayEndtime ="No end time specified";
+                let displayDuration = " - ";
+                if(obj.endTime !==""){
+                    displayEndtime=moment.utc(obj.endTime).format('HH:mm');
+                    displayDuration = `${Math.floor(duration/60)} : ${duration%60} Hrs`
+                }
                 c++
                 return (
                     <tbody>
@@ -19,9 +26,8 @@ class Report extends Component {
                             <td scope="row">{c}</td>
                             <td>{obj.activity}</td>
                             <td> {moment.utc(obj.startTime).format('HH:mm')}</td>
-                            <td>{moment.utc(obj.endTime).format('HH:mm')}</td>
-                            <td>{Math.floor((moment(obj.endTime).diff(moment(obj.startTime)))/60000)} minutes</td>
-
+                            <td>{ displayEndtime}</td>
+                            <td>{displayDuration}</td>
                         </tr>
                     </tbody>
                 )

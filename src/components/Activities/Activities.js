@@ -5,6 +5,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import { TimePickerComponent } from '@syncfusion/ej2-react-calendars';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 //import {NotificationContainer, NotificationManager} from 'react-notifications';
 
@@ -20,12 +22,12 @@ class Activities extends Component {
         this.state = {
             activity: '',
             startTime: currentDate,
-            endTime: currentDateEndTime,
+            endTime: "",
             dateList: [],
             activityDate: new Date(),
             present: new Date(),
             display: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
-            displayActivities: false,
+            displayActivities: true,
         }
     }
 
@@ -56,6 +58,13 @@ class Activities extends Component {
 
     onAddActivityHandler = () => {
 
+        if(this.state.activity !==''){
+            NotificationManager.success('Activity added successfully');
+        }
+        else{
+            NotificationManager.error('No Activity Title added',"",2000);
+              return;
+        }
         this.setState({
             displayActivities: true
         })
@@ -101,18 +110,23 @@ class Activities extends Component {
         date.setDate(date.getDate() - 1)
         this.setState({ present: date })
         let currDate = `${this.state.present.getDate()}/${this.state.present.getMonth() + 1}/${this.state.present.getFullYear()}`
-        console.log(currDate)
+       // console.log(currDate)
         this.setState({ display: currDate })
     }
     handlePresent = (date) => {
-        this.setState({ present: date })
+        let xyz = this.state.present;
+        xyz.setDate(date.getDate());
+        this.setState({ present: xyz })
+        
+        let currDate = `${this.state.present.getDate()}/${this.state.present.getMonth() + 1}/${this.state.present.getFullYear()}`
+        this.setState({ display: currDate }) 
     }
     handleNext = () => {
         let date = this.state.present;
         date.setDate(date.getDate() + 1)
         this.setState({ present: date })
         let currDate = `${this.state.present.getDate()}/${this.state.present.getMonth() + 1}/${this.state.present.getFullYear()}`
-        console.log(currDate)
+       // console.log(currDate)
         this.setState({ display: currDate })
     }
 
@@ -129,7 +143,7 @@ class Activities extends Component {
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
                 <link rel="stylesheet" type="text/css" href="styles.css" />
-               
+                <NotificationContainer />
                 <div className="InputActivityDiv">
 
                     <input className="InputActivity"
@@ -169,38 +183,28 @@ class Activities extends Component {
                     <button className="Button"
                         onClick={() => this.onAddActivityHandler()}>Add Activity</button>
                 </div>
-
-                <div>
+               
+                {/* <div>
                     <button className="ShowButton"
                         onClick={() => this.onShowActivitiesHandler()}>{!this.state.displayActivities ? 'Show Activities' : 'Close Activities'}</button>
-                </div>
-
-                {/* <div className="outputContent">
-                    {this.state.displayActivities ?
-                       // <Output username={this.props.username} />
-
-                        : null}
                 </div> */}
+
                 <div className='container'>
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
                     {this.state.displayActivities ?
                         <table className="table table-bordered">
                             <thead className="thead-dark">
                                 <tr>
-                                    <th scope="col" >
-                                        <div className="form-group">
-                                            <button class="btn float-right login_btn" onClick={this.handlePrevious}>Previous</button>
-                                        </div>
+                                    <th scope="col" align="left">
+                                            <button class="btn float-left login_btn" onClick={this.handlePrevious}>Previous</button>                                       
                                     </th>
-                                    <th colSpan='3' scope="col">
-                                        <div className="input-group form-group">
+                                    <th colSpan='3' scope="col" align="center" >
+                                        <div  style={{textAlign:"center"}}>
                                             <DatePicker className="form-control" placeholder="date" onChange={this.handlePresent} selected={this.state.present} value={this.state.present} />
                                         </div>
                                     </th>
-                                    <th scope="col">
-                                        <div className="form-group">
+                                    <th scope="col" align="right">
                                             <button class="btn float-right login_btn" onClick={this.handleNext}>Next</button>
-                                        </div>
                                     </th>
                                 </tr>
                                 <tr>

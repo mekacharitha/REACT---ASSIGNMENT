@@ -25,6 +25,9 @@ class Sidebar extends React.Component {
               
                 {/* <h1>Hello {this.props.name}</h1> */}
                 <Switch>
+                <Route exact path="/">
+                        <Activities username={this.props.username}/>
+                    </Route>
                     <Route path="/activities">
                         <Activities username={this.props.username}/>
                     </Route>
